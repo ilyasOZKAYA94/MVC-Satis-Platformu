@@ -1,0 +1,187 @@
+﻿@model Entity.ViewModel.AddAdvert
+
+@{
+    ViewBag.Title = "AddAdvert";
+}
+<script src="~/ckeditor/ckeditor.js"></script>
+@using (Html.BeginForm("AddAdvert", "Home", FormMethod.Post, new { encType = "multipart/form-data" }))
+{
+
+<div class="form-horizontal" style="height:1100px;">
+    <hr />
+    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+    <div class="form-group">
+        @Html.Label("İlan Başlığı :", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Ürün Adı :", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Renk :", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Fiyat :", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.Price, new { htmlAttributes = new  { @class = "form-control" , type = "number", onkeydown = "return event.keyCode !== 69" } })
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Garanti Durumu :", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox" style="padding-left:20px;">
+                @Html.EditorFor(model => model.Warranty)
+                @Html.ValidationMessageFor(model => model.Warranty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Açıklama :", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control ckeditor" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.Label("Vitrin Resmi :", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.PictureUpload, new { type = "file", name = "PictureUpload", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Image1, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.Label("Resim Seçiniz :", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.PictureUpload, new { type = "file", name = "PictureUpload", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Image2, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.Label("Resim Seçiniz :", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.PictureUpload, new { type = "file", name = "PictureUpload", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Image3, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="Kategori">Kategori :</label>
+        <div class="col-md-8">
+            <select class="form-control" data-val="true" id="Category" name="Category">
+                <option value="-1">Kategori seçiniz</option>
+                @foreach (var item in ViewBag.Category)
+                {
+                    <option value="@item.Id">@item.CategoryName</option>
+                }
+            </select>
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="Marka">Marka :</label>
+        <div class="col-md-8">
+            <select class="form-control" data-val="true" id="Trademark" name="Trademark">
+                <option value="-1"></option>
+                @foreach (var item in ViewBag.Trademark)
+                {
+                    <option value="@item.Id">@item.TrademarkName</option>
+                }
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.Label("Model :", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-8">
+            @Html.DropDownList("ModelId", new SelectList(ViewBag.Model, "Id", "ModelName"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ModelId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Yayınla" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+<script>
+    $(document).ready(function () {
+        $('#Category').on('change', function () {
+            var categoryID = $('#Category option:selected').val();
+            $.ajax({
+
+                type: 'GET',
+                data: { categoryID: categoryID },
+                url: '@Url.Action("loadTrademark", "Admin")',
+                success: function (result) {
+                    var x = '<option value="-1">Marka seçiniz</option>';
+                    for (var i = 0; i < result.length; ++i) {
+                        x += '<option value="' + result[i].id + '">' + result[i].Name
+                            + '</option>';
+                    }
+                    $('#Trademark').html(x);
+
+                }
+            });
+        });
+
+
+        $('#Trademark').on('change', function () {
+            var trademarkID = $('#Trademark option:selected').val();
+            $.ajax({
+
+                type: 'GET',
+                data: { trademarkID: trademarkID },
+                url: '@Url.Action("loadModel", "Home")',
+                success: function (result) {
+                    var x = '<option value="-1">Model seçiniz</option>';
+                    for (var i = 0; i < result.length; ++i) {
+                        x += '<option value="' + result[i].id + '">' + result[i].Name
+                            + '</option>';
+                    }
+                    $('#ModelId').html(x);
+
+                }
+            });
+        });
+
+
+
+
+
+
+    });
+
+    CKEDITOR.replace("Description", {
+            uiColor: '#fc7f7f'
+        });
+</script>

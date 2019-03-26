@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="~/images/Logo.jpg" type="image/x-icon" />
+    <link rel="favicon" href="~/images/logo.ico" type="image/icon">
+    <title>Satıyorum.Com</title>
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/js/jquery.min.js"></script>
+    <!-- Custom Theme files -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Custom Theme files -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Eshop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--webfont-->
+    <!-- for bootstrap working -->
+    <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
+    <!-- //for bootstrap working -->
+    <!-- cart -->
+    <script src="/js/simpleCart.min.js"></script>
+    <!-- cart -->
+    <link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen" />
+</head>
+<body>
+    <!-- header-section-starts -->
+    <div class="header">
+        <div class="header-top-strip">
+            <div class="container">
+                <div class="header-top-left">
+                    <ul>
+                        @if (Session["User"] == null)
+                        {
+                            <li><button onclick="giris_yap()" class="btn btn-default btn-sm"> <span class="glyphicon glyphicon-user"></span> Giriş Yap</button> </li>
+                            <li><button onclick="hesap_olustur()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-log-out"></span> Yeni Hesap Oluştur</button> </li>
+                        }
+                        else
+                        {
+                            <li><button onclick="profilim()" class="btn btn-default btn-sm"> <span class="glyphicon glyphicon-user"></span> Profilim </button></li>
+                            <li><button onclick="cikis_yap()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-log-out"></span> Çıkış Yap</button> </li>
+                        }
+                    </ul>
+                </div>
+                <div class="header-right">
+                    @if (Session["User"] != null)
+                    {
+                        <input type="submit" value="Mesaj kutunuz boş!" class="btn btn-success" data-toggle="modal" data-target=".bootstrapmodal" id="msgBox">
+                    }
+                    </div>
+
+                <div class="header-center" align="center" style="margin-top:10px;">
+                    <ul>
+                        @if (Session["User"] != null)
+                        {
+                            <li style="list-style-type:none;"><span style="font-family: sans-serif; color: white;" id="userControl"><b>Hoşgeldin @Session["User"].ToString()</b></span> </li>
+                        }
+                    </ul>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>                          
+    </div>
+    <!-- header-section-ends -->
+    <div class="banner-top">
+        <div class="container">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="logo">
+                        <h1><a href="/Home/Index"><span>S</span> -Satıyorum.Com</a></h1>
+                    </div>
+                </div>
+                <!--/.navbar-header-->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/Home/AddAdvert">İlan Ver</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kategoriler<b class="caret"></b></a>
+                            <ul class="dropdown-menu multi-column columns-3">
+                                <div class="row">
+
+                                    @foreach (var item in ViewBag.Category)
+                                    {
+                                        
+                                        <div class="col-sm-4">
+                                            <ul class="multi-column-dropdown">
+                                                 <h6>@item.CategoryName</h6>
+                                                @foreach (var trademark in item.Trademarks)
+                                                {
+                                                    <li>
+                                                        <a href="/Home/Index?Id=@trademark.Id">
+                                                            @trademark.TrademarkName
+                                                        </a>
+                                                    </li>
+
+                                                }
+
+
+
+
+
+                                                @*<li><a href="products.html">New In Clothing</a></li>*@
+
+                                            </ul>
+                                        </div>
+
+                                    }
+
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">kids <b class="caret"></b></a>
+                            <ul class="dropdown-menu multi-column columns-2">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <ul class="multi-column-dropdown">
+                                            <h6>NEW IN</h6>
+                                            <li><a href="products.html">New In Boys Clothing</a></li>
+                                            <li><a href="products.html">New In Girls Clothing</a></li>
+                                            <li><a href="products.html">New In Boys Shoes</a></li>
+                                            <li><a href="products.html">New In Girls Shoes</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <ul class="multi-column-dropdown">
+                                            <h6>ACCESSORIES</h6>
+                                            <li><a href="products.html">Bags</a></li>
+                                            <li><a href="products.html">Watches</a></li>
+                                            <li><a href="products.html">Sun Glasses</a></li>
+                                            <li><a href="products.html">Jewellery</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </ul>
+                        </li>
+                        <li><a href="typography.html">TYPO</a></li>
+                        <li><a href="/Home/Contact">CONTACT</a></li>
+                    </ul>
+                </div>
+                <!--/.navbar-collapse-->
+            </nav>
+            <!--/.navbar-->
+        </div>
+    </div>
+
+
+
+    <!-- content-section-starts-here -->
+    <div class="container">
+        <div class="main-content">
+            <div class="online-strip">
+                <div class="col-md-4">
+                    <h3>follow us : <a class="twitter" href="https://twitter.com/login?lang=tr" target="_blank"></a><a class="facebook" href="https://www.facebook.com/" target="_blank"></a></h3>
+                </div>
+                <div class="col-md-4 shipping-grid">
+                    <div class="shipping">
+                        <img src="~/images/paket.png" alt="" />
+                    </div>
+                    <div class="shipping-text">
+                        <h3>Yeni ilan paketimiz</h3>
+                        <p>Midi paket 50 ₺</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4 online-order">
+                    <p>Destek için</p>
+                    <h3>Tel:999 4567 8902</h3>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            @RenderBody()
+        </div>
+
+    </div>
+
+    <div class="news-letter" id="userKontrol">
+        <div class="container">
+
+            <div class="modal fade bootstrapmodal" >
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#f5f5f5; border-radius:15px;">
+                            <button data-dismiss="modal" class="close" id="close"><span>&times;</span></button>
+                            <div class="modal-title"><label id="label"></label></div>
+                        </div>
+                        <div class="modal-body" style="min-height:300px; background-color:#E6EAEA;">
+                            <ul id="mesajListe"></ul>
+                        </div>
+                        <div class="modal-footer" style="background-color:#f5f5f5; border-radius:15px;">
+                            <div class="col-md-3">
+                                <input type="text" id="txtMesaj" style="width: 450px; height: 33px; border-radius:20px; padding-left:10px;" placeholder=" Lütfen mesajınızı giriniz">
+                            </div>
+                            <button type="submit" style="float:right; border-radius:20px;" class="btn btn-success btn-md" id="btnGonder"> <span class="glyphicon glyphicon-send" style="font-size:14px;"> Gönder</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div class="footer_top">
+                <div class="span_of_4">
+                    <div class="col-md-3 span1_of_4">
+                        <h4>Shop</h4>
+                        <ul class="f_nav">
+                            <li><a href="#">new arrivals</a></li>
+                            <li><a href="#">men</a></li>
+                            <li><a href="#">women</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 span1_of_4">
+                        <h4>help</h4>
+                        <ul class="f_nav">
+                            <li><a href="#">frequently asked  questions</a></li>
+                            <li><a href="#">men</a></li>
+                            <li><a href="#">women</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 span1_of_4">
+                        <h4>account</h4>
+                        <ul class="f_nav">
+                            <li><a href="account.html">login</a></li>
+                            <li><a href="register.html">create an account</a></li>
+                            <li><a href="#">create wishlist</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 span1_of_4">
+                        <h4>popular</h4>
+                        <ul class="f_nav">
+                            <li><a href="#">new arrivals</a></li>
+                            <li><a href="#">men</a></li>
+                            <li><a href="#">women</a></li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <input type="text" value="val" id="kimden" hidden />
+                   
+            <div class="copyright text-center" style="padding-top:50px;">
+                <p style="">© @System.DateTime.Now.Year Satıyorum.com Tüm Hakları Saklıdır | Designed by Ilyas OZKAYA
+            </div>
+
+          
+        </div>
+        
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.0.js"></script>
+    <script src="/signalr/hubs"></script>
+</body>
+</html>
+<script type="text/javascript">
+    $(function () {
+        var chatHub = $.connection.chatHub;
+
+        chatHub.client.getMessage = function (who, message) {
+            $("#mesajListe").append("<li style=\"display:block; -webkit-column-break-inside:avoid; page-break-inside: avoid; break-inside:avoid; border-radius:10px; background-color:#32465a; width:80%; min-height:25px; list-style-type:none;\"><span style=\"padding-top:3px;color:#FFF; display:block; width:450px; word-wrap:break-word; padding-left:10px;\">" + who + " : " + message + "</span></li><br/>");
+            $("#kimden").val(who);
+            $("#msgBox").val("Yeni Mesajınız Var!")
+        }
+
+        chatHub.client.getMessageCaller = function (message) {
+            $("#mesajListe").append("<li style=\"display:block;-webkit-column-break-inside:avoid; page-break-inside: avoid; break-inside:avoid; float:right; border-radius:10px; background-color:#f5f5f5; width:80%; min-height:25px; list-style-type:none;\"><span style=\"padding-top:3px;color:#000; display:block; width:450px; word-wrap:break-word; padding-left:10px;\"> Siz : " + message + "</span></li><br/><br/>")
+        }
+
+        chatHub.client.Information = function (message) {
+            $("#mesajListe").append("<li style=\"-webkit-column-break-inside:avoid; page-break-inside: avoid; break-inside:avoid; list-style-type:none;\"><span style=\"padding-top:3px; color:#f5f5f5\">Siz : " + message + "</span></li>");
+            $("#mesajListe").append("<li style=\"-webkit-column-break-inside:avoid; page-break-inside: avoid; break-inside:avoid; list-style-type:none;\">Kullanıcı şuanda çevrimdışı...</li>")
+        }
+
+
+        chatHub.client.InfoMessage = function (message) {
+            alert(message);
+        }
+        chatHub.client.EmptyMessage = function (message) {
+            alert(message);
+        }
+   
+
+
+        $("#msgBox").click(function () {
+            $("#msgBox").val("Mesaj Kutunuz Boş!")
+        })
+
+        $("#btnGonder").click(function () {
+            var message = $("#txtMesaj").val();
+            $("#txtMesaj").val("");
+            var kime = $("#kimden").val();
+            chatHub.server.receiveMessage(message, kime);
+        })
+
+        $("#msgStart").click(function () {
+            if ($("#userControl").val() == null) {
+                location.href = "/Account/Login";
+            }
+            else {
+                $("#userKontrol").show();
+            }
+    $("#mesajListe").empty();
+    var message = "Merhaba"
+    var saticiadi = $("#sellername").val();
+    $("#kimden").val(saticiadi);
+    chatHub.server.receiveMessage(message, saticiadi);
+})
+
+$.connection.hub.start();
+})
+
+function giris_yap() {
+location.href = "/Account/Login";
+}
+function hesap_olustur() {
+location.href = "/Account/Register";
+}
+function profilim() {
+location.href = "/Profile/Index";
+}
+function cikis_yap() {
+location.href = "/Account/LogOut";
+}
+$("#close").click(function () {
+    $("#mesajListe").empty();
+    $("#msgBox").val("Mesaj Kutunuz Boş!")
+})
+
+
+</script>

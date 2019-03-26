@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Entity.Entity.Advert>
+
+@{
+    ViewBag.Title = "MyAdverts";
+    Layout = "~/Views/Shared/_ProfilLayoutPage.cshtml";
+}
+
+<div class="products-grid">
+    <header>
+        <h3 class="head text-center">Yayındaki ilanlarınız</h3>
+    </header>
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 product simpleCart_shelfItem text-center">
+            <a href="/Profile/AdvertUpdate/@item.Id"><img src="/images/@item.Image1" alt=""  /></a>
+            <div class="mask">
+                <a href="/Profile/AdvertUpdate/@item.Id">Güncelle</a>
+            </div>
+            <a class="product_name" href="single.html">@item.ProductName</a>
+            <p><img src="~/images/goz.jpg" style="width:20px;" title="Görüntülenme" /><span> @item.Views | </span></p>
+            <p><i></i><span class="item_price">@item.Price ₺ </span></p>
+        </div>
+    }
+</div>

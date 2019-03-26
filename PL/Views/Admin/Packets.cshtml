@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Entity.Entity.Packets>
+
+@{
+    ViewBag.Title = "Packets";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+
+@if (Model.Count() == 0)
+{@Html.ActionLink("Yeni Paket Oluştur", "pCreate")
+<h3>Listelenecek Paket Bulunamadı.</h3>
+}
+else
+{
+
+<div class="container">
+    <div class="row col-md-12 custyle" style="padding-left:50px;">
+        <table class="table table-striped custab">
+            <thead>
+                <a href="/Admin/pCreate" class="btn btn-primary btn-xs pull-left" style="height:35px; text-align:center; padding-top:7px;">
+                    <b>+</b> Yeni Paket Oluştur
+                </a>
+                <tr>
+                    <th>İlan Hakkı</th>
+                    <th>Fiyat</th>
+                    <th class="text-center">İşlemler</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.AdRights) Adet</td>
+                    <td>@Html.DisplayFor(modelItem => item.Price) ₺</td>
+                    <td class="text-center">
+                        <a class='btn btn-info btn-xs' href="/Admin/pEdit?id=@item.Id"><span class="glyphicon glyphicon-edit"></span> Düzenle</a>
+                        <a id="delete" data-id="@item.Id" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Sil</a>
+                        @*<a href="/Admin/pDelete?id=@item.Id" data-id="@item.Id" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Sil</a>*@
+                    </td>
+
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+}
+
+
+<script type="text/javascript">
+    $(document).on("click", "#delete", function () {
+        var confirmDelete = confirm("Silme işlemini onaylıyor musunuz?");
+        if (confirmDelete) {
+            var id = $(this).attr("data-id");
+            var deleteTR = $(this).closest("tr");
+            $.ajax({
+                url: "/Admin/pDelete/" + id,
+                type: 'POST',
+                success: function () {
+                    deleteTR.fadeOut(400, function () {
+                        deleteTR();
+                    });
+                }
+            });
+        }
+    });
+</script>
+
+
+
+

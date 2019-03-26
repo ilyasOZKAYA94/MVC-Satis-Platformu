@@ -1,0 +1,61 @@
+﻿@model Entity.ViewModel.ProfileViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ProfilLayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="row" style="max-width:80%">
+        <h2 class="text-danger">Profil Bilgilerim</h2>
+
+
+        <table class="table table-bordered success" style="max-width:90%">
+            <thead>
+                <tr>
+                    <th class="info">İsim Soyisim :</th>
+                    <td>@Model.Ad @Model.Soyad</td>
+                </tr>
+                <tr>
+                    <th class="info">Kullanıcı Adı :</th>
+                    <td>@Model.UserName</td>
+                </tr>
+                <tr>
+                    <th class="info">Email :</th>
+                    <td>@Model.Email</td>
+                </tr> 
+                <tr>
+                    <th class="info">Telefon Numarası :</th>
+                    <td>@Model.PhoneNumber</td>
+                </tr>       
+                <tr>
+                    <th class="info">Kalan İlan Hakkı :</th>
+                    <td>@Model.remainingAdvert</td>
+                </tr>
+                <tr>
+                    <th class="info">Yayınlanan İlan Sayısı :</th>
+                    <td>@Model.PostedAdvert</td>
+                </tr>
+                <tr>
+                    <th class="info">Satılan Ürün Sayısı :</th>
+                    <td>@Model.SelledAdvert</td>
+                </tr>
+
+                <tr>
+                    <th class="info">Register Date</th>
+                    <td class="bg-info">@Model.RegisterDate</td>
+                </tr>
+                
+                <tr>
+                    <th colspan="1"></th>
+                    <td>
+                        <a href="/Home/Index" class="btn btn-warning">Back</a>
+                    </td>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+

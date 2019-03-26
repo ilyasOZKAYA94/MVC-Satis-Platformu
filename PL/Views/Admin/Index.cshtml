@@ -1,0 +1,117 @@
+﻿@model Entity.Entity.Advert
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+@if (Model == null)
+{
+<div class="container">
+    <div class="row" style="max-width:80%">
+        <h2 class="text-danger">Sistem Tablosu</h2>
+
+
+        <table class="table table-bordered success" style="max-width:90%">
+            <thead>
+                <tr>
+                    <th class="info">Aktif KullanıcıSayısı </th>
+                    <td>@TempData["User"]</td>
+                </tr>
+                <tr>
+                    <th class="info">Yayındaki İlan Sayısı </th>
+                    <td>@TempData["Active"]</td>
+                </tr>
+                <tr>
+                    <th class="info">Satılan İlan Sayısı </th>
+                    <td>@TempData["Sold"]</td>
+                </tr>
+                <tr>
+                    <th class="info">Satılamadan Kaldırılan İlan Sayısı </th>
+                    <td>@TempData["UnSold"]</td>
+                </tr>                
+            </thead>
+        </table>
+    </div>
+</div>
+}
+else
+{
+    <div class="container">
+        <div class="products-page">
+            <a href="/Admin/Confirm/@Model.Id" class="btn btn-info">Yayınla</a>
+            <a href="/Admin/Decline/@Model.Id" class="btn btn-info">Reddet</a>
+            <div class="new-product">
+                <div class="col-md-5 zoom-grid">
+                    <div class="flexslider">
+                        <ul class="slides">
+                            <li data-thumb="/images/@Model.Image1">
+                                <div class="thumb-image"> <img src="/images/@Model.Image1" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+                            </li>
+                            <li data-thumb="/images/@Model.Image2">
+                                <div class="thumb-image"> <img src="/images/@Model.Image2" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+                            </li>
+                            <li data-thumb="/images/@Model.Image3">
+                                <div class="thumb-image"> <img src="/images/@Model.Image3" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-7 dress-info">
+                    <div class="dress-name">
+                        <h3>@Model.ProductName</h3>
+                        <span> @Model.Price ₺ </span>
+                        <div class="clearfix"></div>
+                        <hr /><strong><u>Açıklama</u></strong><br /><hr style="color:slategray" />
+                        @Html.Raw(Model.Description)
+                    </div>
+                    <div class="span span1">
+                        <p class="left"><u>Renk</u></p>
+                        <p class="right">@Model.Color</p>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="span span2">
+                        <p class="left"><u>Garanti Durumu</u></p>
+                        <p class="right">
+                            @Model.Warranty
+                        </p>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="span span3">
+                        <p class="left"><u>İlan Sahibi</u></p>
+                        <p class="right">@Model.SellerId</p>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="span span4">
+                        <p class="left"><u>Görüntülenme</u></p>
+                        <p class="left">@Model.Views</p>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <script src="/js/imagezoom.js"></script>
+                    <!-- FlexSlider -->
+                    <script defer src="/js/jquery.flexslider.js"></script>
+                    <script>
+                        // Can also be used with $(document).ready()
+                        $(window).load(function () {
+                            $('.flexslider').flexslider({
+                                animation: "slide",
+                                controlNav: "thumbnails"
+                            });
+                        });
+                    </script>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+
+}
+
+
+
+
+
+
+

@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="~/images/Logo.jpg" type="image/x-icon" />
+    <link rel="favicon" href="~/images/logo.ico" type="image/icon">
+    <title>Satıyorum.Com</title>
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/js/jquery.min.js"></script>
+    <!-- Custom Theme files -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Custom Theme files -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Eshop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--webfont-->
+    <!-- for bootstrap working -->
+    <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
+    <!-- //for bootstrap working -->
+    <!-- cart -->
+    <script src="/js/simpleCart.min.js"></script>
+    <!-- cart -->
+    <link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen" />
+</head>
+<body>
+    <!-- header-section-starts -->
+    <div class="header">
+        <div class="header-top-strip">
+            <div class="container">
+                <div class="header-top-left">
+                    <ul>
+                        @if (Session["User"] != null)
+                        {
+                            <li><button onclick="cikis_yap()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-log-out"></span> Çıkış Yap</button> </li>
+                        }                      
+
+                    </ul>
+                </div>
+        
+                <div class="header-center" align="center" style="margin-top:10px;">
+                    <ul>
+                        @if (Session["User"] != null)
+                        {
+                            <li style="list-style-type:none;"><span style="font-family: sans-serif; color: white;"><b>Hoşgeldin @Session["User"].ToString()</b></span> </li>
+                        }
+                    </ul>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <!-- header-section-ends -->
+    <div class="banner-top">
+        <div class="container">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="logo">
+                        <h1><a href="/Home/Index"><span>S</span> -Satıyorum.Com</a></h1>
+                    </div>
+                </div>
+                <!--/.navbar-header-->
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/Admin/Index">İlan İşlemleri</a></li>
+                        <li><a href="/Admin/AddCTM">Kategori/Marka/Model İşlemleri</a></li>
+                        <li><a href="/Admin/UserOperations">Üye İşlemleri</a></li>
+                        <li><a href="/Admin/Packets">İlan Paketleri</a></li>
+                    </ul>
+                </div>
+                <!--/.navbar-collapse-->
+            </nav>
+            <!--/.navbar-->
+        </div>
+    </div>
+
+
+
+    <!-- content-section-starts-here -->
+    <div class="container" style="padding-top:30px; min-height:450px;">
+        <div class="main-content">
+         
+            @RenderBody()
+        </div>
+
+    </div>
+
+    <div class="news-letter">
+        <div class="container">
+        </div>
+    </div>
+    <div class="footer">
+        <div class="copyright text-center" style="padding-top:50px;">
+            <p style="">© @System.DateTime.Now.Year Satıyorum.com Tüm Hakları Saklıdır | Designed By Ilyas OZKAYA</p>
+        </div>
+
+    </div>
+</body>
+</html>
+<script>
+    function cikis_yap() {
+        location.href = "/Account/LogOut";
+    }
+</script>

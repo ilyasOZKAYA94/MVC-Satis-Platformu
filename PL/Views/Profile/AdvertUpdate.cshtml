@@ -1,0 +1,115 @@
+﻿@model Entity.Entity.Advert
+
+@{
+    ViewBag.Title = "AdvertUpdate";
+    Layout = "~/Views/Shared/_ProfilLayoutPage.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.Label("Başlık :", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Ürün adı :", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Renk :", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Garanti durumu :", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                <div class="checkbox" style="padding-left:20px;">
+                    @Html.EditorFor(model => model.Warranty)
+                    @Html.ValidationMessageFor(model => model.Warranty, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Ürün açıklaması :", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.Label("Fiyatı :", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+            <div class="col-md-offset-3 col-md-6" style="padding-right:1px;">
+                <a id="delete" data-id="@Model.Id" class="btn btn-danger">Ürünüm Satıldı</a>
+                <a id="remove" data-id="@Model.Id" class="btn btn-danger">Artık Satmak İstemiyorum</a>
+                <input type="submit" value="Güncelle" class="btn btn-success" />
+            </div>
+    </div>
+}
+
+<div class="col-md-1" style="padding-left:2px;">
+    <a href="/Profile/Index" class="btn btn-default">Vazgeç</a>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).on("click", "#remove", function () {
+        var confirmDelete = confirm("Yayından kaldırma işlemini onaylıyor musunuz?");
+        if (confirmDelete) {
+            var id = $(this).attr("data-id");
+            $.ajax({
+                url: "/Profile/RemoveAdvert/" + id,
+                type: 'POST',
+                success: function () {
+                    location.href = "/Profile/MyAdverts";
+                   
+                }
+            });
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).on("click", "#delete", function () {
+        var confirmDelete = confirm("Yayından kaldırma işlemini onaylıyor musunuz?");
+        if (confirmDelete) {
+            var id = $(this).attr("data-id");
+            $.ajax({
+                url: "/Profile/SoldAdvert/" + id,
+                type: 'POST',
+                success: function () {
+                    location.href = "/Profile/MyAdverts";
+                }
+            });
+        }
+    });
+</script>

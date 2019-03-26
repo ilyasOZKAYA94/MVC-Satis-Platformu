@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "AddCTM";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+
+
+<div class="container">
+    <div class="row" style="min-height:500px;">
+        <div class="col-md-4">
+            @Html.Partial("AddCategory")
+        </div>
+        <div class="col-md-4">
+            @Html.Partial("AddTrademark")
+        </div>
+        <div class="col-md-4">
+            @Html.Partial("AddModel")
+        </div>
+    </div>
+</div>

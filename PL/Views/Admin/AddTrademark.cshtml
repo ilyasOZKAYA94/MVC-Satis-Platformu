@@ -1,0 +1,34 @@
+﻿@model Entity.ViewModel.AddTrademarkViewModel
+
+@using (Html.BeginForm("AddTrademark", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    <h3>Marka Ekle</h3>
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("Kategori", htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.DropDownList("CategoryId", new SelectList(ViewBag.Category, "Id", "CategoryName"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Marka Adı", htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.TrademarkName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TrademarkName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Ekle" class="btn btn-success" style="float:right" />
+        </div>
+    </div>
+</div>
+}
+

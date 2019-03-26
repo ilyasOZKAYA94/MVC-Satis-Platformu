@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="product-listy">
+                    <h2>our Products</h2>
+                    <ul class="product-list">
+                        <li><a href="/Profile/Index">Hesap Bilgilerim</a></li>
+                        <li><a href="/Profile/MyAdverts">Yayındaki Ürünlerim</a></li>
+                        <li><a href="">Mesaj Kutum</a></li>
+                        <li><a href="">sdfdsfsdf</a></li>
+                        <li><a href="">sadasdsad</a></li>
+                        <li><a href="">sadsadsad</a></li>
+                        <li><a href="#">sadsadsa</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
+        </div>
+    </div>   
+</body>
+</html>
